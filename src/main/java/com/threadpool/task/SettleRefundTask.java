@@ -1,5 +1,10 @@
 package com.threadpool.task;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 import java.util.concurrent.Callable;
 
 /**
@@ -9,20 +14,26 @@ import java.util.concurrent.Callable;
  * @创建时间 2020/1/11
  * @描述
  */
+@Component
+@Scope("prototype")
 public class SettleRefundTask implements Callable<Integer> {
-    private final String uniqueNo;
+    @Resource(name = "settleRefund")
+    ThreadPoolTaskExecutor threadPoolTask;
 
-    public SettleRefundTask(String uniqueNo) {
+    private String uniqueNo;
+    private String name;
+
+    public SettleRefundTask(String uniqueNo, String name) {
         this.uniqueNo = uniqueNo;
+        this.name = name;
     }
 
     @Override
-    public Integer call() throws Exception {
+    public Integer call() {
+        System.err.println("threadPoolTask: " + threadPoolTask + ", name: " + name);
         try {
             System.err.println("id:" + Thread.currentThread().getId()
                     + "   name:" + Thread.currentThread().getName() + " start -> uniqueNo: " + this.uniqueNo);
-            System.err.println("id:" + Thread.currentThread().getId()
-                    + "   name:" + Thread.currentThread().getName() + " end -> uniqueNo: " + this.uniqueNo);
         } catch (Exception e) {
             return -1;
         }

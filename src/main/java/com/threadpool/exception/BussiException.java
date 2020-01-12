@@ -1,5 +1,7 @@
 package com.threadpool.exception;
 
+import java.util.concurrent.RejectedExecutionException;
+
 /**
  * @创建人 sgwang
  * @name BussiException
@@ -7,8 +9,7 @@ package com.threadpool.exception;
  * @创建时间 2020/1/11
  * @描述
  */
-public class BussiException extends RuntimeException {
-    static final long serialVersionUID = -7034897190745766971L;
+public class BussiException extends RejectedExecutionException {
 
     public BussiException() {
         super();

@@ -22,16 +22,8 @@ import java.time.LocalDateTime;
 @SpringBootApplication
 @EnableScheduling
 public class StartThreadPoolApp {
-    @Resource(name = "settleRefund")
-    ThreadPoolTaskExecutor threadPoolTask;
-
     public static void main(String[] args) {
         SpringApplication.run(StartThreadPoolApp.class);
-    }
-
-    @Scheduled(fixedRate =  1000)
-    public void testThreadPool(){
-
     }
 
 }
